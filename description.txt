@@ -1,0 +1,1 @@
+A simple currency converter for your site. Uses real time currency rates.
