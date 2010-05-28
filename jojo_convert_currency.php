@@ -81,7 +81,7 @@ class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
             }
 
             /* Location prices in html */
-            preg_match_all('#\$(^[0-9]+[0-9,.]*)#', $content, $prices);
+            preg_match_all('#\$([0-9]+[0-9,.]*)#', $content, $prices);
 
             /* Sort results */
             uasort($prices[1], create_function('$a,$b','return strlen($b) - strlen($a);'));
