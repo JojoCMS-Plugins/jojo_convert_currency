@@ -11,3 +11,7 @@ function convert_currency() {
                 $('#convert_currency_result').html(data);
             });
 }
+
+$(document).ready(function() {
+        $('.convert_currency_inline_convert').hide();
+});

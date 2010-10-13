@@ -95,10 +95,10 @@ class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
                 $new = str_replace(',', '', $value) * $rate;
 
                 $currencies = array(
-                                    'USD' => '$',
-                                    'NZD' => '$',
-                                    'AUD' => '$',
-                                    'CAD' => '$',
+                                    'USD' => '&#36;',
+                                    'NZD' => '&#36;',
+                                    'AUD' => '&#36;',
+                                    'CAD' => '&#36;',
                                     'GBP' => '&pound;',
                                     'EUR' => '&euro;',
                                     'JPY' => '&yen;',
@@ -107,7 +107,7 @@ class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
                 $decimals      = (strpos($original, '.') && $rate < 10) ? 2 : 0;
                 $thousands_sep = strpos($original, ',') ? ',' : '';
                 $currencysymbol = isset($currencies[$to]) ? $currencies[$to] : ' ';
-                $new_string = sprintf( '%s <span class="converted-currency">(%s%s%s)</span>',
+                $new_string = sprintf( '%s&nbsp;<span class="converted-currency">(%s%s%s)</span>',
                                     $original,
                                     $to,
                                     $currencysymbol,
