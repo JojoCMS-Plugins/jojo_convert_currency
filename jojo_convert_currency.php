@@ -49,8 +49,10 @@ class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
         }
 
         global $smarty;
+        $content = explode('</head>', $content);
+        $bodycontent = $content[1];
 
-        preg_match_all('/\[\[convert_currency_inline:([^\]]*)\]\]/', $content, $filters);
+        preg_match_all('/\[\[convert_currency_inline:([^\]]*)\]\]/', $bodycontent, $filters);
         $replacestring = $filters[0] ? $filters[0] : '[[convert_currency_inline]]';
         $defaulttocurrency = isset($filters[1][0]) ? $filters[1][0] : '';
         foreach (Jojo::listPlugins('classes/JOJO/Currency.php') as $pluginfile) {
@@ -81,7 +83,7 @@ class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
             }
 
             /* Location prices in html */
-            preg_match_all('#\$([0-9]+[0-9,.]*)#', $content, $prices);
+            preg_match_all('#\$([0-9]+[0-9,.]*)#', $bodycontent, $prices);
 
             /* Sort results */
             uasort($prices[1], create_function('$a,$b','return strlen($b) - strlen($a);'));
@@ -115,7 +117,7 @@ class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
                                 );
                 $new_string = str_replace('$', '\$', $new_string) . '$1';
                 $pattern = str_replace('$', '\$', "#$original([^0-9])#");
-                $content = preg_replace($pattern, $new_string, $content);
+                $bodycontent = preg_replace($pattern, $new_string, $bodycontent);
                 $done[] = $original;
             }
         }
@@ -124,7 +126,9 @@ class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
         $smarty->assign('currencies', $c->getCurrencies());
         $smarty->assign('base_currency', Jojo::getOption('currency_convert_from'));
 
-        return str_replace($replacestring, $smarty->fetch('convert-currency-inline.tpl'), $content);
+        $bodycontent = str_replace($replacestring, $smarty->fetch('convert-currency-inline.tpl'), $bodycontent);
+        $content = $content[0] . '</head>' .  $bodycontent;
+        return $content;
     }
 
     public function _getContent()
