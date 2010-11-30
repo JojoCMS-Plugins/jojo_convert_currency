@@ -18,7 +18,10 @@
 <input type="submit" name="convert" id="convert_currency_convert" value="Convert"  class="button" />
 </form>
 <script type='text/javascript'>{literal}
+
+$(document).ready(function() {
     $('#convert_currency_convert').hide();
     $('#convert_currency_form').submit(function() { return false; });
     convert_currency();
+});
 {/literal}</script>
