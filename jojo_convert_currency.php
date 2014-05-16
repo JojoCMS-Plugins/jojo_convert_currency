@@ -17,7 +17,7 @@
  * @link    http://www.jojocms.org JojoCMS
  */
 
-class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
+class Jojo_Plugin_jojo_convert_currency extends JOJO_Plugin
 {
     public static function inpageconverter($content)
     {
@@ -31,9 +31,9 @@ class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
             break;
         }
 
-        $c = new JOJO_Currency_yahoo();
+        $c = new Jojo_Currency_yahoo();
 
-        $amount = Util::getFormData('amount', 1);
+        $amount = Jojo::getFormData('amount', 1);
         $smarty->assign('from',   isset($_SESSION['jojo_currency_from'])   ? $_SESSION['jojo_currency_from'] : Jojo::getOption('currency_convert_from'));
         $smarty->assign('to',     isset($_SESSION['jojo_currency_to'])     ? $_SESSION['jojo_currency_to']   : Jojo::getOption('currency_convert_to'));
         $smarty->assign('amount', isset($_SESSION['jojo_currency_amount']) ? $_SESSION['jojo_currency_amount'] : 1);
@@ -59,11 +59,11 @@ class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
             require_once($pluginfile);
             break;
         }
-        $c = new JOJO_Currency_yahoo();
+        $c = new Jojo_Currency_yahoo();
 
         /* Get Exchange Rate */
         $from   = Jojo::getOption('currency_convert_from');
-        $to     = Util::getFormData('to', isset($_SESSION['jojo_currency_to']) ? $_SESSION['jojo_currency_to'] : ($defaulttocurrency ? $defaulttocurrency : Jojo::getOption('currency_convert_to')));
+        $to     = Jojo::getFormData('to', isset($_SESSION['jojo_currency_to']) ? $_SESSION['jojo_currency_to'] : ($defaulttocurrency ? $defaulttocurrency : Jojo::getOption('currency_convert_to')));
         $_SESSION['jojo_currency_to'] = $to;
 
         if ($to != $from) {
@@ -139,11 +139,11 @@ class JOJO_Plugin_jojo_convert_currency extends JOJO_Plugin
             require_once($pluginfile);
             break;
         }
-        $c = new JOJO_Currency_yahoo();
+        $c = new Jojo_Currency_yahoo();
 
-        $from = Util::getFormData('from', Jojo::getOption('currency_convert_from'));
-        $to = Util::getFormData('to', Jojo::getOption('currency_convert_to'));
-        $amount = Util::getFormData('amount', 1);
+        $from = Jojo::getFormData('from', Jojo::getOption('currency_convert_from'));
+        $to = Jojo::getFormData('to', Jojo::getOption('currency_convert_to'));
+        $amount = Jojo::getFormData('amount', 1);
 
         if (!is_numeric($amount)) {
             $amount = 1;

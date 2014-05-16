@@ -17,7 +17,7 @@
  * @link    http://www.jojocms.org JojoCMS
  */
 
-class JOJO_Currency
+class Jojo_Currency
 {
     function getCurrencies()
     {

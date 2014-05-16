@@ -3,9 +3,9 @@
 header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
-$from   = Util::getFormData('from', '');
-$to     = Util::getFormData('to', '');
-$amount = Util::getFormData('amount', 1);
+$from   = Jojo::getFormData('from', '');
+$to     = Jojo::getFormData('to', '');
+$amount = Jojo::getFormData('amount', 1);
 
 if (!$from || !$to) {
     exit;
@@ -24,7 +24,7 @@ $cacheFile = _CACHEDIR . "/currency/$from-$to";
 if (!file_exists($cacheFile) || ((time() - filemtime($cacheFile)) > 1800 )) {
     /* Update cached copy */
     require_once(_PLUGINDIR . '/jojo_convert_currency/classes/JOJO/Currency.php');
-    $c = new JOJO_Currency_yahoo();
+    $c = new Jojo_Currency_yahoo();
     $rate = $c->getRate($from, $to, true);
     file_put_contents($cacheFile, $rate);
 } else {
