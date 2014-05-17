@@ -15,16 +15,16 @@ Jojo::addFilter('output', 'inpageconverter', 'jojo_convert_currency');
 Jojo::addFilter('output', 'inlineconverter', 'jojo_convert_currency');
 
 $_provides['pluginClasses'] = array(
-        'JOJO_Plugin_jojo_convert_currency' => 'Currency - Currency Converter',
+        'Jojo_Plugin_jojo_convert_currency' => 'Currency - Currency Converter',
         );
         
         
 /* Get list of available currencies */
-foreach (Jojo::listPlugins('classes/JOJO/Currency.php') as $pluginfile) {
+foreach (Jojo::listPlugins('classes/Jojo/Currency.php') as $pluginfile) {
             require_once($pluginfile);
             break;
         }
-$c = new JOJO_Currency_yahoo();
+$c = new Jojo_Currency_yahoo();
 $currencies = array_keys($c->getCurrencies());
 
 
